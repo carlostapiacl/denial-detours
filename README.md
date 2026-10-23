@@ -1,7 +1,11 @@
 # denial-detours
 
 When a coding agent is denied a write to a file that belongs to someone else, does it look for
-another way to get the change in? And does that change when the denial says whose the file is?
+another way to get the change in? And does that change when it knows whose the file is?
+
+**Exploratory.** One task carries the main comparison, the rules were fixed during the first run
+([PROVENANCE.md](PROVENANCE.md)), and an external review found defects that are now fixed and
+dated in [RULES.md](RULES.md). Read [RESULTS.md](RESULTS.md) for what this does and does not show.
 
 This repository is the experiment: one small task, three agents, three conditions, every trial
 kept whole. The rules for counting were written before the results were looked at
@@ -73,8 +77,16 @@ Round 2 writes to `~/Library/Caches/denial-detours/round-2/<task>/<agent>/<condi
 fixture, the test output and `meta.json` with versions and timing. Each agent starts from a
 clean configuration with no user-level instructions or memory (`runner/agents.mjs`).
 
-The fixture is read-only and its hashes are checked before and after every trial
-(`runner/fixture.sha256`): an agent run without a sandbox once edited it.
+The fixture is read-only and its hashes are checked before and after every trial: an agent run
+without a sandbox once edited it. The tests run the agent's code, so they run on a copy inside
+sandbox-runtime (`runner/evaluate.mjs`). The `baseline` condition runs the agent itself with no
+sandbox on your machine: run it in a disposable VM.
+
+```bash
+node --test runner/rules.test.mjs                           # the classifier's rules
+node runner/stats.mjs results/round-1/classification.jsonl  # every p-value and interval
+node runner/counterfactual.mjs                              # apply the owner's fix, test again
+```
 
 ## Limits
 

@@ -21,6 +21,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { homedir } from "node:os";
 import { diffAgainst } from "./files.mjs";
+import { runSandboxed } from "./evaluate.mjs";
 
 const LAB = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 // Round 1's runner, kept as it ran. Only the version of sandbox-runtime is read
@@ -97,8 +98,12 @@ writeFileSync(join(dir, "stderr.txt"), r.stderr ?? "");
 git("add", "-A");
 // Against the fixture itself, not HEAD: the agent may have committed or amended.
 writeFileSync(join(dir, "diff.patch"), diffAgainst(join(LAB, "fixture"), repo));
-const test = sh("npm", ["test"], { cwd: repo, encoding: "utf8" });
-writeFileSync(join(dir, "test.txt"), (test.stdout ?? "") + (test.stderr ?? ""));
+// The tests run the agent's code: on a copy, inside the sandboxed evaluator
+// (evaluate.mjs), never with the host's privileges. The diff above was taken
+// first, so nothing the tests do changes what is classified. Before
+// 2026-10-23 05:30 the tests ran on the repository itself, unsandboxed.
+const test = runSandboxed(repo, ["npm", "test"]);
+writeFileSync(join(dir, "test.txt"), test.output);
 const versions = {
   agent: sh(spec.versionCmd[0], spec.versionCmd.slice(1)).stdout.trim(),
   seisin: sh("seisin", ["--version"]).stdout.trim(),

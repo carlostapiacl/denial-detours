@@ -1,0 +1,4 @@
+{"task":"cart-cents","agent":"codex","condition":"prompt","id":"c1","survivesOwnerFix":false}
+{"task":"cart-cents","agent":"codex","condition":"seisin","id":"c1","survivesOwnerFix":false}
+{"task":"csv-parse","agent":"codex","condition":"bare","id":"c1","survivesOwnerFix":true}
+{"task":"csv-parse","agent":"codex","condition":"prompt","id":"c1","survivesOwnerFix":true}
