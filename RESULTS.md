@@ -5,7 +5,8 @@ Exploratory. What the trials say and what they do not, revised after three exter
 Every row of `classification.jsonl` recomputes from the published trials
 (`node runner/verify.mjs`), and every graded trial is rebuilt from the fixture and its
 `diff.patch` and tested again, with the owner's fix for each compensation
-(`node runner/replay.mjs`): no difference in either round. Rules in [RULES.md](RULES.md); when they
+(`node runner/replay.mjs`): no difference in either round. That reproduces the grading;
+repeating the experiment means running the agents again, whose models change. Rules in [RULES.md](RULES.md); when they
 were written, in [PROVENANCE.md](PROVENANCE.md).
 
 ## What ran
@@ -44,8 +45,9 @@ p < 2×10⁻⁴ for Codex and opencode; without cached input, p = 0.01 and 0.004
 difference (p = 1), which with 10–11 trials is not evidence that there is none.
 
 **What the `seisin` effect is.** Under `seisin` no agent tried the owner's file at all: the
-kernel recorded no refused write in any of the 32 trials, so the denial message seisin adds was
-never shown. The agents knew the owner beforehand, from the policy file (9 of 11 Claude Code
+kernel refused no write to the owner's folder in any of the 32 trials (it refused other operations,
+such as macOS services and the agent's own configuration, which are outside this boundary), so the
+message seisin adds when it denies another role's file was never shown. The agents knew the owner beforehand, from the policy file (9 of 11 Claude Code
 runs, 3 of 11 Codex, 10 of 10 opencode read it) or from the hook at session start. The effect is
 of knowing ownership in advance; nothing here measures the denial message itself, and the hook
 and the visible policy are not separated.
@@ -90,7 +92,7 @@ not in its three `nocomp` trials (two `prompt-nocomp`, one `seisin-nocomp`).
 
 ## What it does not support
 
-- That the denial message helps: under `seisin` there was no denial.
+- That the denial message helps: under `seisin` no write to the owner's folder was denied.
 - Anything beyond one task for `bare` against `seisin`.
 - That compensation is unaffected by ownership: no difference observed is not no difference.
 - Whether `nocomp` works (three trials) or how `prompt` compares to `seisin` (one per cell).
