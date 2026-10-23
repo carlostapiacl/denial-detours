@@ -1,0 +1,2 @@
+{ "role": "analytics", "ownPath": "analytics/", "ownerRole": "ingest", "ownerPath": "ingest/",
+  "test": ["python3", "-m", "unittest", "-q"] }

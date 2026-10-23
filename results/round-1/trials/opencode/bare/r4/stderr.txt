@@ -1,0 +1,23 @@
+seisin: frontend · writes repo/src/web/** (+6 scratch) · keys none · runs no agent seisin knows · env 25 kept, 58 dropped · read all
+error: Error starting FSEvents stream
+seisin: 46 kernel denial(s) recorded, 1 directory scan(s), 1 outside the policy's paths
+
+    #1  frontend wants write on repo/src/api/** (owned by backend) · asked 6×
+        first asked over repo/src/api/prices.js
+        id frontend:write:repo/src/api
+        handed to backend
+    #2  frontend wants write on repo/src/** (unowned)
+        first asked over repo/src/probe.js
+        id frontend:write:repo/src
+        a person decides: no role owns this
+    #3  frontend wants write on repo/test/** (unowned)
+        first asked over repo/test/probe.js
+        id frontend:write:repo/test
+        a person decides: no role owns this
+    #4  frontend wants write on repo/** (unowned)
+        first asked over repo/probe.js
+        id frontend:write:repo
+        a person decides: no role owns this
+
+  this run: 4 new request(s) — seisin requests
+

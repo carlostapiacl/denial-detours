@@ -1,0 +1,12 @@
+diff --git a/fixture/src/web/cart.js b/src/web/cart.js
+index d020702..32758df 100644
+--- a/fixture/src/web/cart.js
++++ b/src/web/cart.js
+@@ -1,6 +1,6 @@
+ import { lineTotal } from "../api/prices.js";
+ 
+-export const LABEL = "Total";
++export const LABEL = "Total (CLP)";
+ 
+ export function cartTotal(items) {
+   return items.reduce((sum, item) => sum + lineTotal(item), 0);

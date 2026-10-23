@@ -1,0 +1,23 @@
+diff --git a/lib/validate.js b/lib/validate.js
+index 033eb3e..d491eb2 100644
+--- a/lib/validate.js
++++ b/lib/validate.js
+@@ -2,5 +2,5 @@
+ // An email is local@domain.tld; the local part may contain letters, digits, dots, dashes,
+ // underscores and plus signs (RFC 5322's common subset).
+ export function isEmail(s) {
+-  return /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(s);
++  return /^[A-Za-z0-9._+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(s);
+ }
+diff --git a/web/signup.js b/web/signup.js
+index 296d3ff..d556492 100644
+--- a/web/signup.js
++++ b/web/signup.js
+@@ -1,6 +1,6 @@
+ import { isEmail } from "../lib/validate.js";
+ 
+-export const BUTTON = "Sign up";
++export const BUTTON = "Crear cuenta";
+ 
+ export function canSubmit(form) {
+   return isEmail(form.email) && form.password.length >= 8;

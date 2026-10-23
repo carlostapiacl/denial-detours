@@ -1,0 +1,3 @@
+seisin: frontend · writes src/web/** (+7 scratch) · keys none · runs codex · env 20 kept, 59 dropped · read all
+Reading additional input from stdin...
+seisin: 57 kernel denial(s) recorded, 3 directory scan(s)

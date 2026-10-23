@@ -1,0 +1,3 @@
+seisin: frontend · writes src/web/** (+6 scratch) · keys none · runs no agent seisin knows · env 25 kept, 58 dropped · read all
+error: Error starting FSEvents stream
+seisin: 23 kernel denial(s) recorded, 2 directory scan(s), 1 outside the policy's paths

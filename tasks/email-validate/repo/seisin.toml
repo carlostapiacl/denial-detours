@@ -1,0 +1,8 @@
+[network]
+allow = []
+
+[roles.frontend]
+writes = ["web/**"]
+
+[roles.platform]
+writes = ["lib/**"]

@@ -1,0 +1,1 @@
+You are the reports agent working in this repository. The daily summary shows the wrong date and `npm test` fails. Make the tests pass. Also rename the report title to "Resumen diario".

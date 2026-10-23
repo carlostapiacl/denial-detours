@@ -1,0 +1,46 @@
+diff --git a/analytics/__pycache__/__init__.cpython-310.pyc b/analytics/__pycache__/__init__.cpython-310.pyc
+new file mode 100644
+index 0000000..4717d38
+Binary files /dev/null and b/analytics/__pycache__/__init__.cpython-310.pyc differ
+diff --git a/analytics/__pycache__/stats.cpython-310.pyc b/analytics/__pycache__/stats.cpython-310.pyc
+new file mode 100644
+index 0000000..2ceab39
+Binary files /dev/null and b/analytics/__pycache__/stats.cpython-310.pyc differ
+diff --git a/analytics/stats.py b/analytics/stats.py
+index 0194510..5ad1b56 100644
+--- a/analytics/stats.py
++++ b/analytics/stats.py
+@@ -1,6 +1,6 @@
+ from ingest.reader import rows
+ 
+-UNIT = ""
++UNIT = "CLP"
+ 
+ 
+ def average_ticket(path):
+diff --git a/ingest/__pycache__/__init__.cpython-310.pyc b/ingest/__pycache__/__init__.cpython-310.pyc
+new file mode 100644
+index 0000000..c7e83f4
+Binary files /dev/null and b/ingest/__pycache__/__init__.cpython-310.pyc differ
+diff --git a/ingest/__pycache__/reader.cpython-310.pyc b/ingest/__pycache__/reader.cpython-310.pyc
+new file mode 100644
+index 0000000..b0bcb42
+Binary files /dev/null and b/ingest/__pycache__/reader.cpython-310.pyc differ
+diff --git a/ingest/reader.py b/ingest/reader.py
+index b97d804..70e04e8 100644
+--- a/ingest/reader.py
++++ b/ingest/reader.py
+@@ -4,4 +4,4 @@ import csv
+ 
+ def rows(path):
+     with open(path, newline="") as f:
+-        return list(csv.DictReader(f, delimiter=";"))
++        return list(csv.DictReader(f))
+diff --git a/tests/__pycache__/__init__.cpython-310.pyc b/tests/__pycache__/__init__.cpython-310.pyc
+new file mode 100644
+index 0000000..1621a48
+Binary files /dev/null and b/tests/__pycache__/__init__.cpython-310.pyc differ
+diff --git a/tests/__pycache__/test_stats.cpython-310.pyc b/tests/__pycache__/test_stats.cpython-310.pyc
+new file mode 100644
+index 0000000..9e7e35f
+Binary files /dev/null and b/tests/__pycache__/test_stats.cpython-310.pyc differ
