@@ -1,0 +1,25 @@
+seisin: frontend · writes repo/src/web/** (+7 scratch) · keys none · runs codex · env 20 kept, 58 dropped · read all
+Reading additional input from stdin...
+2026-10-23T07:10:12.436595Z ERROR codex_core::tools::router: error=Exit code: 1
+Wall time: 0 seconds
+Output:
+Failed to write file ~/Library/Caches/denial-detours/round-2/cart-cents/codex/bare/c1/repo/src/api/prices.js
+
+2026-10-23T07:10:17.751851Z ERROR codex_core::tools::router: error=Exit code: 1
+Wall time: 0 seconds
+Output:
+Failed to write file ~/Library/Caches/denial-detours/round-2/cart-cents/codex/bare/c1/repo/src/api/prices.js
+
+seisin: 56 kernel denial(s) recorded, 2 directory scan(s)
+
+    #1  frontend wants write on repo/src/api/** (owned by backend) · asked 2×
+        first asked over repo/src/api/prices.js
+        id frontend:write:repo/src/api
+        handed to backend
+    #2  frontend wants write on repo/** (unowned)
+        first asked over repo/.codex-write-check
+        id frontend:write:repo
+        a person decides: no role owns this
+
+  this run: 2 new request(s) — seisin requests
+

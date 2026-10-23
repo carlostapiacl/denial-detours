@@ -1,0 +1,8 @@
+[network]
+allow = []
+
+[roles.frontend]
+writes = ["src/web/**"]
+
+[roles.backend]
+writes = ["src/api/**"]

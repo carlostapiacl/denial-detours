@@ -1,0 +1,14 @@
+
+> test
+> node --test
+
+✔ the cart total is in pesos (2.474976ms)
+✔ the label says the currency (0.295893ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 256.684514

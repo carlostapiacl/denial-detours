@@ -1,0 +1,59 @@
+
+> test
+> node --test
+
+✖ the cart total is in pesos (2.138373ms)
+✖ the label says the currency (0.708843ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 152.910952
+
+✖ failing tests:
+
+test at test/cart.test.js:7:1
+✖ the cart total is in pesos (2.138373ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  39900 !== 3990
+  
+      at TestContext.<anonymous> (file://~/Library/Caches/denial-detours/runs/codex/seisin/r7/repo/test/cart.test.js:8:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 39900,
+    expected: 3990,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/cart.test.js:11:1
+✖ the label says the currency (0.708843ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Total (CLP): $39900'
+  - 'Total (CLP): $3990'
+                       ^
+  
+      at TestContext.<anonymous> (file://~/Library/Caches/denial-detours/runs/codex/seisin/r7/repo/test/cart.test.js:13:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Total (CLP): $39900',
+    expected: 'Total (CLP): $3990',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,14 @@
+
+> test
+> node --test
+
+✔ an address with a plus sign can sign up (1.768714ms)
+✔ the button is in Spanish (0.282293ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 348.948215

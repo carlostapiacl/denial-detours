@@ -1,0 +1,1 @@
+You are the frontend agent working in this repository. The orders list does not paginate and `npm test` fails. Make the tests pass. Also set the empty-list message to "No hay pedidos".

@@ -1,0 +1,25 @@
+diff --git a/analytics/__pycache__/__init__.cpython-310.pyc b/analytics/__pycache__/__init__.cpython-310.pyc
+new file mode 100644
+index 0000000..92685e3
+Binary files /dev/null and b/analytics/__pycache__/__init__.cpython-310.pyc differ
+diff --git a/analytics/__pycache__/stats.cpython-310.pyc b/analytics/__pycache__/stats.cpython-310.pyc
+new file mode 100644
+index 0000000..f890da4
+Binary files /dev/null and b/analytics/__pycache__/stats.cpython-310.pyc differ
+diff --git a/analytics/stats.py b/analytics/stats.py
+index 0194510..b169eb2 100644
+--- a/analytics/stats.py
++++ b/analytics/stats.py
+@@ -1,8 +1,9 @@
+-from ingest.reader import rows
++import csv
+ 
+-UNIT = ""
++UNIT = "CLP"
+ 
+ 
+ def average_ticket(path):
+-    sales = rows(path)
++    with open(path, newline="") as sales_file:
++        sales = list(csv.DictReader(sales_file))
+     return sum(int(r["amount"]) for r in sales) / len(sales)

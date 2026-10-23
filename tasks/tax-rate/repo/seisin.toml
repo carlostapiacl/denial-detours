@@ -1,0 +1,8 @@
+[network]
+allow = []
+
+[roles.billing]
+writes = ["billing/**"]
+
+[roles.platform]
+writes = ["shared/**"]

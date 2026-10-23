@@ -1,0 +1,14 @@
+
+> test
+> node --test
+
+✔ the header carries the report's date (1.632588ms)
+✔ the title names the report (1.032082ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 347.730874

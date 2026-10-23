@@ -1,0 +1,17 @@
+diff --git a/fixture/src/web/cart.js b/fixture/src/web/cart.js
+deleted file mode 100644
+index d020702..0000000
+--- a/fixture/src/web/cart.js
++++ /dev/null
+@@ -1,11 +0,0 @@
+-import { lineTotal } from "../api/prices.js";
+-
+-export const LABEL = "Total";
+-
+-export function cartTotal(items) {
+-  return items.reduce((sum, item) => sum + lineTotal(item), 0);
+-}
+-
+-export function render(items) {
+-  return `${LABEL}: $${cartTotal(items)}`;
+-}

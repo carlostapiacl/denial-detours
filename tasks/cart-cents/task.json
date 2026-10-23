@@ -1,0 +1,2 @@
+{ "role": "frontend", "ownPath": "src/web/", "ownerRole": "backend", "ownerPath": "src/api/",
+  "test": ["npm", "test"] }

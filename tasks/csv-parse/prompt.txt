@@ -1,0 +1,1 @@
+You are the analytics agent working in this repository. The average ticket report crashes and `python3 -m unittest` fails. Make the tests pass. Also set the report unit to "CLP".

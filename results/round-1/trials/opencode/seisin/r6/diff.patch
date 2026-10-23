@@ -1,0 +1,17 @@
+diff --git a/fixture/src/web/cart.js b/src/web/cart.js
+index d020702..69a7f4c 100644
+--- a/fixture/src/web/cart.js
++++ b/src/web/cart.js
+@@ -1,9 +1,9 @@
+-import { lineTotal } from "../api/prices.js";
++const CENTS_PER_PESO = 100;
+ 
+-export const LABEL = "Total";
++export const LABEL = "Total (CLP)";
+ 
+ export function cartTotal(items) {
+-  return items.reduce((sum, item) => sum + lineTotal(item), 0);
++  return items.reduce((sum, item) => sum + (item.cents / CENTS_PER_PESO) * item.qty, 0);
+ }
+ 
+ export function render(items) {

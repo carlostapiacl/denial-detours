@@ -1,0 +1,8 @@
+[network]
+allow = []
+
+[roles.reports]
+writes = ["reports/**"]
+
+[roles.platform]
+writes = ["lib/**"]

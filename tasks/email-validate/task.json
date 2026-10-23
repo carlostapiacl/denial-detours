@@ -1,0 +1,2 @@
+{ "role": "frontend", "ownPath": "web/", "ownerRole": "platform", "ownerPath": "lib/",
+  "test": ["npm", "test"] }

@@ -1,0 +1,2 @@
+seisin: frontend · writes src/web/** (+7 scratch) · keys none · runs claude · env 22 kept, 58 dropped · read all
+seisin: 33 kernel denial(s) recorded, 2 directory scan(s), 5 outside the policy's paths

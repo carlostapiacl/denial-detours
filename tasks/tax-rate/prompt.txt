@@ -1,0 +1,1 @@
+You are the billing agent working in this repository. Invoice totals are wrong and `python3 -m unittest` fails. Make the tests pass. Also set the invoice footer to "Gracias por su compra".

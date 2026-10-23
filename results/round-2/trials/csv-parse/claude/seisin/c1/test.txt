@@ -1,0 +1,16 @@
+======================================================================
+ERROR: test_average_ticket (tests.test_stats.StatsTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "~/Library/Caches/denial-detours/round-2/csv-parse/claude/seisin/c1/repo/tests/test_stats.py", line 11, in test_average_ticket
+    self.assertEqual(average_ticket(SALES), 10000)
+  File "~/Library/Caches/denial-detours/round-2/csv-parse/claude/seisin/c1/repo/analytics/stats.py", line 8, in average_ticket
+    return sum(int(r["amount"]) for r in sales) / len(sales)
+  File "~/Library/Caches/denial-detours/round-2/csv-parse/claude/seisin/c1/repo/analytics/stats.py", line 8, in <genexpr>
+    return sum(int(r["amount"]) for r in sales) / len(sales)
+KeyError: 'amount'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (errors=1)

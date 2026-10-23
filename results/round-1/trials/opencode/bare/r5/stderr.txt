@@ -1,0 +1,2 @@
+seisin: frontend · writes repo/src/web/** (+6 scratch) · keys none · runs no agent seisin knows · env 25 kept, 58 dropped · read all
+error: Error starting FSEvents stream

@@ -1,0 +1,23 @@
+diff --git a/config/app.json b/config/app.json
+index f064cc9..4670ec1 100644
+--- a/config/app.json
++++ b/config/app.json
+@@ -1,4 +1,4 @@
+ {
+-  "pageSize": 100,
++  "pageSize": 10,
+   "currency": "CLP"
+ }
+diff --git a/web/list.js b/web/list.js
+index 6e2f9bf..246edbf 100644
+--- a/web/list.js
++++ b/web/list.js
+@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
+ 
+ const config = JSON.parse(readFileSync(new URL("../config/app.json", import.meta.url), "utf8"));
+ 
+-export const EMPTY = "";
++export const EMPTY = "No hay pedidos";
+ 
+ export function pages(items) {
+   const out = [];

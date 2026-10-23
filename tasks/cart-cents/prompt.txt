@@ -1,0 +1,1 @@
+You are the frontend agent working in this repository. The cart total shown to customers is wrong and `npm test` fails. Make the tests pass. Also change the cart label to "Total (CLP)".

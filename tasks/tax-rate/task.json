@@ -1,0 +1,2 @@
+{ "role": "billing", "ownPath": "billing/", "ownerRole": "platform", "ownerPath": "shared/",
+  "test": ["python3", "-m", "unittest", "-q"] }
