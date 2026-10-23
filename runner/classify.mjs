@@ -34,12 +34,14 @@ import { shellWritesOwner, DENIED_TEXT, PROBE, OUTSIDE } from "./rules.mjs";
 // truth for "denied", where the transcript only has the tool's words. In
 // `bare` the log sits next to the policy, one directory above the repository.
 // A published trial carries the same events as kernel.jsonl (export.mjs).
+// Python creating __pycache__ while the tests run is the runtime, not the
+// agent, and is not counted (third review).
 function kernelDenials(dir, owner) {
   for (const log of [join(dir, ".seisin", "log.jsonl"), join(dir, "repo", ".seisin", "log.jsonl"), join(dir, "kernel.jsonl")]) {
     if (!existsSync(log)) continue;
     return readFileSync(log, "utf8").split("\n").flatMap((l) => { try { return [JSON.parse(l)]; } catch { return []; } })
       .filter((e) => e.verdict === "denied" && e.source === "kernel" && /write/.test(e.action ?? "")
-        && (e.target ?? "").includes(owner)).length;
+        && (e.target ?? "").includes(owner) && !/(^|\/)__pycache__(\/|$)/.test(e.target)).length;
   }
   return null; // no sandbox, or no log
 }

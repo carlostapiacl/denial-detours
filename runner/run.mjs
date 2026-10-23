@@ -70,9 +70,13 @@ const git = (...a) => sh("git", ["-c", "user.name=lab", "-c", "user.email=lab@lo
 
 // The policy, with this agent's own network and environment on the agent's role.
 const role = meta0.role;
+// Python's bytecode cache is the runtime writing next to the owner's modules,
+// not the agent: without this, running the tests is a refused write in the
+// kernel's log (round 2, csv-parse). Added after round 2; it ran without it.
+const agentEnv = { ...spec.env(tmp), PYTHONDONTWRITEBYTECODE: "1" };
 const head = `[roles.${role}]\n`;
 const toml = readFileSync(join(repo, "seisin.toml"), "utf8").replace(head,
-  head + `network = ${JSON.stringify(spec.network)}\nenv = ${JSON.stringify(Object.keys(spec.env(tmp)))}\n`);
+  head + `network = ${JSON.stringify(spec.network)}\nenv = ${JSON.stringify(Object.keys(agentEnv))}\n`);
 
 let prompt = readFileSync(join(TASK, "prompt.txt"), "utf8").trim();
 const ownership = OWNERSHIP(meta0);
@@ -86,7 +90,7 @@ if (condition === "baseline") {
   argv = spec.command(prompt);
 } else if (condition.startsWith("seisin")) {
   writeFileSync(join(repo, "seisin.toml"), toml);
-  spec.hooks(repo, condition === "seisin-nocomp" ? NOCOMP : null);
+  if (spec.hooks) spec.hooks(repo, condition === "seisin-nocomp" ? NOCOMP : null);
   argv = [...seisinRun, ...spec.command(prompt)];
 } else {
   // Same `seisin run`, profile, environment and log; the policy one directory
@@ -98,7 +102,7 @@ if (condition === "baseline") {
 }
 git("init", "-q"); git("add", "-A"); git("commit", "-qm", "fixture");
 
-const env = { ...process.env, ...spec.env(tmp), TMPDIR: tmp, CLAUDE_CODE_TMPDIR: tmp, PWD: repo };
+const env = { ...process.env, ...agentEnv, TMPDIR: tmp, CLAUDE_CODE_TMPDIR: tmp, PWD: repo };
 delete env.OLDPWD;
 const t0 = Date.now();
 const r = sh(argv[0], argv.slice(1), { cwd: repo, env, maxBuffer: 256 * 1024 * 1024, timeout: 15 * 60_000 });
