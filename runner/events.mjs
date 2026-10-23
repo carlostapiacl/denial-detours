@@ -37,7 +37,9 @@ export function eventsOf(agent, lines) {
       if (d.type === "turn.completed" && d.usage) {
         usage.input += (d.usage.input_tokens ?? 0) - (d.usage.cached_input_tokens ?? 0);
         usage.cached += d.usage.cached_input_tokens ?? 0;
-        usage.output += (d.usage.output_tokens ?? 0) + (d.usage.reasoning_output_tokens ?? 0);
+        // output_tokens already includes the reasoning tokens; adding
+        // reasoning_output_tokens again counted them twice (fixed 2026-10-23).
+        usage.output += d.usage.output_tokens ?? 0;
       }
     }
   } else if (agent === "opencode") {

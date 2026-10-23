@@ -65,8 +65,16 @@ if (problems.length) {
   for (const p of problems.slice(0, 20)) console.error("  " + p);
   process.exit(1);
 }
-const classify = spawnSync("node", [join(LAB, "runner/classify.mjs"), "--summary"], { encoding: "utf8" }).stdout;
-const [rows, summary] = classify.split("\n\n");
-writeFileSync(join(OUT, "classification.jsonl"), scrub(rows) + "\n");
+const node = (script, ...args) => spawnSync("node", [join(LAB, "runner", script), ...args],
+  { encoding: "utf8", env: process.env, maxBuffer: 1 << 28 }).stdout;
+const [rows, summary] = node("classify.mjs", "--summary").split("\n\n");
+// The trial directory is the machine's; the published path stands in for it.
+const published = rows.split("\n").filter(Boolean).map((l) => {
+  const r = JSON.parse(l); r.dir = join("results", round, "trials", r.dir.slice(RUNS.length + 1)); return JSON.stringify(r);
+}).join("\n");
+writeFileSync(join(OUT, "classification.jsonl"), scrub(published) + "\n");
 writeFileSync(join(OUT, "summary.tsv"), summary);
+writeFileSync(join(OUT, "counterfactual.jsonl"), scrub(node("counterfactual.mjs")));
+writeFileSync(join(OUT, "hand-review.jsonl"), scrub(node("annotate.mjs")));
+writeFileSync(join(OUT, "stats.md"), node("stats.mjs", join(OUT, "classification.jsonl")));
 console.log(`${n} trials → ${OUT}`);
