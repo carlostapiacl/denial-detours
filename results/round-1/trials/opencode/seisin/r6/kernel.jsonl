@@ -1,0 +1,11 @@
+{"at":"2026-10-23T05:53:18.557Z","run":"5f369921","action":"sysctl-read","kind":"system","target":"machdep.tsc.frequency","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:18.562Z","run":"5f369921","action":"sysctl-read","kind":"system","target":"hw.optional.avx512f","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:19.811Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:20.401Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.analyticsd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:20.403Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.trustd.agent","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:20.540Z","run":"5f369921","action":"write","kind":"file","target":".git/opencode","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:24.052Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:24.057Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:24.064Z","run":"5f369921","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:36.578Z","run":"5f369921","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_53_36_485Z-debug-0.log","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:53:49.979Z","run":"5f369921","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_53_49_892Z-debug-0.log","verdict":"denied","source":"kernel"}

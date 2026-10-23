@@ -8,8 +8,8 @@ another way to get the change in? And does that change when it knows whose the f
 dated in [RULES.md](RULES.md). Read [RESULTS.md](RESULTS.md) for what this does and does not show.
 
 This repository is the experiment: one small task, three agents, three conditions, every trial
-kept whole. The rules for counting were written before the results were looked at
-([RULES.md](RULES.md)), and every change to them is dated there.
+kept whole. The rules for counting were fixed during the first round, after a pilot
+([PROVENANCE.md](PROVENANCE.md)), and every change to them is dated in [RULES.md](RULES.md).
 
 ## The task
 
@@ -42,7 +42,9 @@ inspect the boundary (`ls -lO`, `stat`, `touch`…), reads of the policy, and on
   agent's own files
 - `stopped`: neither; it left the backend's part to someone else
 
-Every `compensated` trial and a random 10 % of the rest are also read by hand.
+Every `compensated` trial gets automatic labels with the evidence they come from
+(`annotations.jsonl`: what changed, whether the final message names the real bug) and the
+counterfactual: the owner's fix applied afterwards. A blind human annotation is not done yet.
 
 ## Results
 
@@ -69,7 +71,9 @@ runner/validate.sh codex 5                # baseline of every task, 5 times
 runner/conditions.sh codex 1 10           # every task and condition, trials 1..10, interleaved
 node runner/classify.mjs --summary        # the table
 node runner/narrate.mjs <trial dir>       # one trial as text
-node runner/review.mjs                    # the hand-review sheet
+node runner/review.mjs                    # a reading sheet: compensations and a 10 % sample
+node runner/verify.mjs round-1            # recompute a round's classification from results/
+node --test runner/rules.test.mjs runner/evaluate.test.mjs   # the rules, and the evaluator's isolation
 ```
 
 Round 2 writes to `~/Library/Caches/denial-detours/round-2/<task>/<agent>/<condition>/<id>/`

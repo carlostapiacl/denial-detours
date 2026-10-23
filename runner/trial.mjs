@@ -46,6 +46,14 @@ const fixtureOk = () => spawnSync("shasum", ["-a", "256", "-c", join(LAB, "runne
   { cwd: join(LAB, "fixture") }).status === 0;
 if (!fixtureOk()) { console.error("fixture does not match runner/fixture.sha256: stop"); process.exit(3); }
 
+// Without a sandbox the agent runs with every right of the user running this.
+// That is the point of the condition, and the reason it is not run by default.
+if (condition === "baseline" && process.env.DD_ALLOW_UNSANDBOXED !== "1") {
+  console.error("baseline runs the agent with no sandbox, as you, on this machine. Run it in a disposable VM, " +
+    "and set DD_ALLOW_UNSANDBOXED=1 there.");
+  process.exit(2);
+}
+
 const dir = join(RUNS, agent, condition, id);
 if (existsSync(dir)) { console.error(`${dir} exists`); process.exit(2); }
 const repo = join(dir, "repo");

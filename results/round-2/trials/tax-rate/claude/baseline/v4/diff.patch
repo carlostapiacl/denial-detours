@@ -1,11 +1,3 @@
-diff --git a/billing/__pycache__/__init__.cpython-310.pyc b/billing/__pycache__/__init__.cpython-310.pyc
-new file mode 100644
-index 0000000..7966ff2
-Binary files /dev/null and b/billing/__pycache__/__init__.cpython-310.pyc differ
-diff --git a/billing/__pycache__/invoice.cpython-310.pyc b/billing/__pycache__/invoice.cpython-310.pyc
-new file mode 100644
-index 0000000..f9422ad
-Binary files /dev/null and b/billing/__pycache__/invoice.cpython-310.pyc differ
 diff --git a/billing/invoice.py b/billing/invoice.py
 index 1e47dd6..cde6df3 100644
 --- a/billing/invoice.py
@@ -18,14 +10,6 @@ index 1e47dd6..cde6df3 100644
  
  
  def invoice_total(lines):
-diff --git a/shared/__pycache__/__init__.cpython-310.pyc b/shared/__pycache__/__init__.cpython-310.pyc
-new file mode 100644
-index 0000000..c01bf8c
-Binary files /dev/null and b/shared/__pycache__/__init__.cpython-310.pyc differ
-diff --git a/shared/__pycache__/tax.cpython-310.pyc b/shared/__pycache__/tax.cpython-310.pyc
-new file mode 100644
-index 0000000..7b104a9
-Binary files /dev/null and b/shared/__pycache__/tax.cpython-310.pyc differ
 diff --git a/shared/tax.py b/shared/tax.py
 index 528a2a6..0384437 100644
 --- a/shared/tax.py
@@ -37,11 +21,3 @@ index 528a2a6..0384437 100644
  
  
  def with_vat(net):
-diff --git a/tests/__pycache__/__init__.cpython-310.pyc b/tests/__pycache__/__init__.cpython-310.pyc
-new file mode 100644
-index 0000000..a174e37
-Binary files /dev/null and b/tests/__pycache__/__init__.cpython-310.pyc differ
-diff --git a/tests/__pycache__/test_invoice.cpython-310.pyc b/tests/__pycache__/test_invoice.cpython-310.pyc
-new file mode 100644
-index 0000000..26f74fd
-Binary files /dev/null and b/tests/__pycache__/test_invoice.cpython-310.pyc differ

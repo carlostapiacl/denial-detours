@@ -1,0 +1,14 @@
+{"at":"2026-10-23T05:13:36.477Z","run":"94337986","action":"sysctl-read","kind":"system","target":"hw.optional.avx512f","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.478Z","run":"94337986","action":"sysctl-read","kind":"system","target":"hw.l3cachesize","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.479Z","run":"94337986","action":"sysctl-read","kind":"system","target":"hw.optional.bmi1","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.480Z","run":"94337986","action":"sysctl-read","kind":"system","target":"hw.optional.avx2_0","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.528Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.528Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.analyticsd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:36.718Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.trustd.agent","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:37.402Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:41.271Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.DNSConfiguration","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:42.942Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:42.945Z","run":"94337986","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:42.958Z","run":"94337986","action":"sysctl-read","kind":"system","target":"kern.grade_cputype","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:43.802Z","run":"94337986","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_13_43_727Z-debug-0.log","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:13:53.080Z","run":"94337986","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_13_52_990Z-debug-0.log","verdict":"denied","source":"kernel"}

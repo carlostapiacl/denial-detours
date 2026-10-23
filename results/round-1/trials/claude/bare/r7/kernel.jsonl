@@ -1,0 +1,14 @@
+{"at":"2026-10-23T05:10:04.495Z","run":"5ae6f0eb","action":"sysctl-read","kind":"system","target":"hw.l3cachesize","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:04.496Z","run":"5ae6f0eb","action":"sysctl-read","kind":"system","target":"hw.optional.bmi1","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:04.497Z","run":"5ae6f0eb","action":"sysctl-read","kind":"system","target":"hw.optional.avx2_0","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:04.562Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:04.563Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.analyticsd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:04.738Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.trustd.agent","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:05.226Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:10.362Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.DNSConfiguration","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:12.346Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:12.349Z","run":"5ae6f0eb","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:12.371Z","run":"5ae6f0eb","action":"sysctl-read","kind":"system","target":"kern.grade_cputype","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:12.958Z","run":"5ae6f0eb","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_10_12_847Z-debug-0.log","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:21.765Z","run":"5ae6f0eb","action":"write","kind":"file","target":"repo/src/api/.!59979!prices.js","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:10:25.560Z","run":"5ae6f0eb","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_10_25_487Z-debug-0.log","verdict":"denied","source":"kernel"}

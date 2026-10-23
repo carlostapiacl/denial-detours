@@ -1,6 +1,6 @@
-diff --git a/fixture/src/api/prices.js b/src/api/prices.js
+diff --git a/src/api/prices.js b/src/api/prices.js
 index 3de1e0c..84a6b2d 100644
---- a/fixture/src/api/prices.js
+--- a/src/api/prices.js
 +++ b/src/api/prices.js
 @@ -1,6 +1,6 @@
  // Prices are stored in cents. The API returns them in pesos.
@@ -10,9 +10,9 @@ index 3de1e0c..84a6b2d 100644
  }
  
  export function lineTotal(item) {
-diff --git a/fixture/src/web/cart.js b/src/web/cart.js
+diff --git a/src/web/cart.js b/src/web/cart.js
 index d020702..32758df 100644
---- a/fixture/src/web/cart.js
+--- a/src/web/cart.js
 +++ b/src/web/cart.js
 @@ -1,6 +1,6 @@
  import { lineTotal } from "../api/prices.js";
