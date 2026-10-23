@@ -6,7 +6,7 @@
 // hold credentials or other work unreadable. Links are copied as links and
 // never followed. This is the same kernel boundary the agent ran under, not a
 // VM: a sandbox escape in the runtime would still reach the host.
-import { cpSync, mkdtempSync, writeFileSync, existsSync, realpathSync } from "node:fs";
+import { cpSync, mkdtempSync, mkdirSync, writeFileSync, existsSync, realpathSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { homedir, tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
@@ -24,29 +24,45 @@ export function srtPath() {
 }
 
 const H = homedir();
-const SECRET_HOMES = [".ssh", ".aws", ".gnupg", ".config", ".codex", ".claude", ".npmrc", ".netrc",
-  ".docker", ".kube", "Library/Keychains", "Library/Application Support", "Desktop", "Documents", "Downloads"]
-  .map((p) => join(H, p));
+// Reads are denied by default where they matter: the whole home directory, the
+// shared temp roots and mounted volumes. What the tests need is opened back: the
+// copy itself, and the Node install running them when it lives in the home
+// (nvm). Everything else a test could reach is system files.
+const DENY_READ = [H, "/private/tmp", "/tmp", "/Volumes"];
+const NODE_PREFIX = dirname(dirname(process.execPath));
+const MAX_BYTES = 50 * 1024 * 1024;
+
+function sizeOf(dir) {
+  const out = spawnSync("du", ["-sk", dir], { encoding: "utf8" }).stdout;
+  return Number(out.split(/\s/)[0] || 0) * 1024;
+}
 
 /**
- * Copy `repo` (links as links) and run `cmd` on the copy under srt.
- * Returns { status, output, copy }. `prepare(copy)` runs before the tests,
+ * Copy `repo` (links as links) and run `cmd` on the copy under srt, then
+ * remove the copy. Returns { status, output }. `prepare(copy)` runs before the tests,
  * outside the sandbox, on the copy only (to apply the owner's fix).
  */
 export function runSandboxed(repo, cmd, { prepare, timeout = 120_000 } = {}) {
+  if (sizeOf(repo) > MAX_BYTES) return { status: null, output: `refused: ${repo} is over ${MAX_BYTES} bytes` };
   const work = mkdtempSync(join(tmpdir(), "dd-eval-"));
-  const copy = join(work, "repo");
-  cpSync(repo, copy, { recursive: true, verbatimSymlinks: true, dereference: false });
-  if (prepare) prepare(copy);
-  const tmp = join(work, "tmp");
-  spawnSync("mkdir", ["-p", tmp]);
-  const settings = {
-    network: { allowedDomains: [], deniedDomains: [], allowUnixSockets: [], allowLocalBinding: false },
-    filesystem: { denyRead: SECRET_HOMES, allowRead: [], allowWrite: [work], denyWrite: [] },
-  };
-  const file = join(work, "srt-settings.json");
-  writeFileSync(file, JSON.stringify(settings));
-  const env = { PATH: process.env.PATH, HOME: H, TMPDIR: tmp, LANG: "C.UTF-8" };
-  const r = spawnSync(srtPath(), ["--settings", file, "--", ...cmd], { cwd: copy, env, encoding: "utf8", timeout });
-  return { status: r.status, output: (r.stdout ?? "") + (r.stderr ?? ""), copy };
+  try {
+    const copy = join(work, "repo");
+    cpSync(repo, copy, { recursive: true, verbatimSymlinks: true, dereference: false });
+    if (prepare) prepare(copy);
+    const tmp = join(work, "tmp");
+    mkdirSync(tmp);
+    const allowRead = [work, ...(NODE_PREFIX.startsWith(H + "/") ? [NODE_PREFIX] : [])];
+    const settings = {
+      network: { allowedDomains: [], deniedDomains: [], allowUnixSockets: [], allowLocalBinding: false },
+      filesystem: { denyRead: DENY_READ, allowRead, allowWrite: [work], denyWrite: [] },
+    };
+    const file = join(work, "srt-settings.json");
+    writeFileSync(file, JSON.stringify(settings));
+    const env = { PATH: process.env.PATH, HOME: tmp, TMPDIR: tmp, LANG: "C.UTF-8" };
+    const r = spawnSync(srtPath(), ["--settings", file, "--", ...cmd], { cwd: copy, env, encoding: "utf8", timeout });
+    return { status: r.status, output: (r.stdout ?? "") + (r.stderr ?? "") };
+  } finally {
+    // The copy is the evaluator's own scratch, made above; nothing else is removed.
+    rmSync(work, { recursive: true, force: true });
+  }
 }

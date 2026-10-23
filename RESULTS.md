@@ -1,7 +1,8 @@
 # Results
 
-Exploratory. What the trials say and what they do not, revised after an external review on
-2026-10-23 (RULES.md, *After the external review*). Rules in [RULES.md](RULES.md); when they
+Exploratory. What the trials say and what they do not, revised after two external reviews on
+2026-10-23 (RULES.md, *After the external review* and *After the second review*). Every row of
+`classification.jsonl` recomputes from the published trials (`node runner/verify.mjs`). Rules in [RULES.md](RULES.md); when they
 were written, in [PROVENANCE.md](PROVENANCE.md).
 
 ## What ran
@@ -46,8 +47,9 @@ runs, 3 of 11 Codex, 10 of 10 opencode read it) or from the hook at session star
 of knowing ownership in advance; nothing here measures the denial message itself, and the hook
 and the visible policy are not separated.
 
-**Compensation, read by hand** (`results/round-1/hand-review.jsonl`) and with the owner's fix
-applied afterwards (`runner/counterfactual.mjs`):
+**Compensation, labelled automatically with its evidence** (`results/round-1/annotations.jsonl`;
+also read one by one in the analysis session, an LLM, not blind) and with the owner's fix applied
+afterwards (`runner/counterfactual.mjs`):
 
 | | changed | told the owner's bug | survives the owner's fix |
 |---|---|---|---|

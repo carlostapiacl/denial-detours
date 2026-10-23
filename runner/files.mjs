@@ -44,6 +44,10 @@ export function diffAgainst(fixture, repo) {
       return `link ${f}: ${read(join(fixture, f)) ?? "(none)"} => ${read(join(repo, f)) ?? "(none)"}\n`;
     const a = existsSync(join(fixture, f)) ? join(fixture, f) : "/dev/null";
     const b = existsSync(join(repo, f)) ? join(repo, f) : "/dev/null";
-    return spawnSync("git", ["diff", "--no-index", "--", a, b], { encoding: "utf8" }).stdout;
+    // Headers name the file relative to the repository, whatever the paths were.
+    return spawnSync("git", ["diff", "--no-index", "--", a, b], { encoding: "utf8" }).stdout
+      .replace(/^diff --git .*$/m, `diff --git a/${f} b/${f}`)
+      .replace(/^--- (?!\/dev\/null).*$/m, `--- a/${f}`)
+      .replace(/^\+\+\+ (?!\/dev\/null).*$/m, `+++ b/${f}`);
   }).join("");
 }

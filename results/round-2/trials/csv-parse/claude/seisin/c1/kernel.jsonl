@@ -1,0 +1,16 @@
+{"at":"2026-10-23T07:14:12.414Z","run":"3bf4543d","action":"sysctl-read","kind":"system","target":"hw.optional.avx512f","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.415Z","run":"3bf4543d","action":"sysctl-read","kind":"system","target":"hw.l3cachesize","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.416Z","run":"3bf4543d","action":"sysctl-read","kind":"system","target":"hw.optional.bmi1","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.417Z","run":"3bf4543d","action":"sysctl-read","kind":"system","target":"hw.optional.avx2_0","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.417Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.418Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.analyticsd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:12.996Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.trustd.agent","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:14.893Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:25.098Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.DNSConfiguration","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:27.670Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:27.673Z","run":"3bf4543d","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:27.689Z","run":"3bf4543d","action":"sysctl-read","kind":"system","target":"kern.grade_cputype","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:29.053Z","run":"3bf4543d","action":"write","kind":"file","target":"ingest/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:29.056Z","run":"3bf4543d","action":"write","kind":"file","target":"tests/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:36.197Z","run":"3bf4543d","action":"write","kind":"file","target":"ingest/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:36.200Z","run":"3bf4543d","action":"write","kind":"file","target":"tests/__pycache__","verdict":"denied","source":"kernel"}

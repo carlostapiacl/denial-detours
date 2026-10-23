@@ -1,0 +1,14 @@
+{"at":"2026-10-23T05:52:07.231Z","run":"91894e50","action":"sysctl-read","kind":"system","target":"hw.optional.bmi1","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:07.232Z","run":"91894e50","action":"sysctl-read","kind":"system","target":"hw.optional.avx2_0","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:07.235Z","run":"91894e50","action":"sysctl-read","kind":"system","target":"machdep.tsc.frequency","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:07.244Z","run":"91894e50","action":"sysctl-read","kind":"system","target":"hw.optional.avx512f","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:08.625Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:09.273Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.analyticsd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:09.274Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.trustd.agent","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:12.419Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:12.423Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:12.426Z","run":"91894e50","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:17.790Z","run":"91894e50","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T05_52_17_713Z-debug-0.log","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:30.309Z","run":"91894e50","action":"write","kind":"file","target":"repo/src/api/prices.js","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:35.114Z","run":"91894e50","action":"write","kind":"file","target":"repo/src/api/XXTAfWZ4","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T05:52:37.780Z","run":"91894e50","action":"write","kind":"file","target":"repo/src/api/prices.js","verdict":"denied","source":"kernel"}

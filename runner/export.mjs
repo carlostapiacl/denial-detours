@@ -5,9 +5,9 @@
 // like an email address, a token or a key is left in it.
 //
 //   node runner/export.mjs <round>
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, statSync, mkdtempSync, renameSync, cpSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { homedir } from "node:os";
+import { homedir, tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
@@ -15,7 +15,11 @@ const round = process.argv[2];
 if (!round) { console.error("usage: export.mjs <round>"); process.exit(2); }
 const LAB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const RUNS = process.env.DD_RUNS ?? join(homedir(), "Library/Caches/denial-detours/runs");
-const OUT = join(LAB, "results", round);
+// Built in a private staging directory, checked whole, and only then moved
+// into results/: a refused export leaves nothing in the repository. A previous
+// export of the same round is moved aside, not deleted.
+const FINAL = join(LAB, "results", round);
+const OUT = mkdtempSync(join(tmpdir(), `dd-export-${round}-`));
 const FILES = ["transcript.jsonl", "diff.patch", "test.txt", "stderr.txt", "meta.json"];
 const LEAK = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}|sk-[A-Za-z0-9_-]{16,}|ghp_[A-Za-z0-9]{20,}|xox[bap]-[A-Za-z0-9-]{10,}|eyJ[A-Za-z0-9_-]{30,}\.|-----BEGIN [A-Z ]*PRIVATE KEY/;
 // Addresses that are part of the work, not of anyone: git's fixture identity and the
@@ -50,6 +54,16 @@ for (const src of trials) {
     const dst = join(OUT, "trials", src.slice(RUNS.length + 1));
     const [agent, cond, id] = src.slice(RUNS.length + 1).split("/").slice(-3);
     mkdirSync(dst, { recursive: true });
+    // The kernel's refused operations for this run, from seisin's log: time,
+    // action and target, so the denial counts can be recomputed from here.
+    for (const log of [join(src, ".seisin", "log.jsonl"), join(src, "repo", ".seisin", "log.jsonl")]) {
+      if (!existsSync(log)) continue;
+      const events = readFileSync(log, "utf8").split("\n").flatMap((l) => { try { return [JSON.parse(l)]; } catch { return []; } })
+        .filter((e) => e.source === "kernel" && e.verdict === "denied")
+        .map((e) => JSON.stringify({ at: e.at, run: e.run, action: e.action, kind: e.kind, target: e.target, verdict: e.verdict, source: e.source }));
+      writeFileSync(join(dst, "kernel.jsonl"), scrub(events.join("\n") + (events.length ? "\n" : "")));
+      break;
+    }
     for (const f of FILES) {
       if (!existsSync(join(src, f))) continue;
       const text = scrub(readFileSync(join(src, f), "utf8"));
@@ -60,11 +74,23 @@ for (const src of trials) {
     n++;
   }
 }
-if (problems.length) {
-  console.error(`refused: ${problems.length} possible leak(s), nothing to publish until they are looked at`);
-  for (const p of problems.slice(0, 20)) console.error("  " + p);
+// kernel.jsonl and the generated files are checked with the rest.
+function checkTree(d) {
+  for (const x of readdirSync(d)) {
+    const p = join(d, x);
+    if (statSync(p).isDirectory()) { checkTree(p); continue; }
+    const text = readFileSync(p, "utf8");
+    for (const m of text.matchAll(new RegExp(LEAK, "g"))) if (!ALLOWED.has(m[0])) problems.push(`${p.slice(OUT.length + 1)}: ${m[0].slice(0, 12)}…`);
+    if (/\/Users\/|Desktop\/proyectos|01-activos/.test(text)) problems.push(`${p.slice(OUT.length + 1)}: a private path`);
+  }
+}
+function refuseIfProblems() {
+  if (!problems.length) return;
+  console.error(`refused: ${problems.length} possible leak(s); nothing was written to results/. Staging left in ${OUT}`);
+  for (const p of [...new Set(problems)].slice(0, 20)) console.error("  " + p);
   process.exit(1);
 }
+refuseIfProblems();
 const node = (script, ...args) => spawnSync("node", [join(LAB, "runner", script), ...args],
   { encoding: "utf8", env: process.env, maxBuffer: 1 << 28 }).stdout;
 const [rows, summary] = node("classify.mjs", "--summary").split("\n\n");
@@ -75,6 +101,12 @@ const published = rows.split("\n").filter(Boolean).map((l) => {
 writeFileSync(join(OUT, "classification.jsonl"), scrub(published) + "\n");
 writeFileSync(join(OUT, "summary.tsv"), summary);
 writeFileSync(join(OUT, "counterfactual.jsonl"), scrub(node("counterfactual.mjs")));
-writeFileSync(join(OUT, "hand-review.jsonl"), scrub(node("annotate.mjs")));
+writeFileSync(join(OUT, "annotations.jsonl"), scrub(node("annotate.mjs")));
 writeFileSync(join(OUT, "stats.md"), node("stats.mjs", join(OUT, "classification.jsonl")));
-console.log(`${n} trials → ${OUT}`);
+checkTree(OUT);
+refuseIfProblems();
+mkdirSync(dirname(FINAL), { recursive: true });
+if (existsSync(FINAL)) renameSync(FINAL, mkdtempSync(join(tmpdir(), `dd-previous-${round}-`)) + "/" + round);
+cpSync(OUT, FINAL, { recursive: true });
+rmSync(OUT, { recursive: true, force: true }); // the staging copy, made above
+console.log(`${n} trials → ${FINAL}`);

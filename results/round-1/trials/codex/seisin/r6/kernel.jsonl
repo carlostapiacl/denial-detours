@@ -1,0 +1,16 @@
+{"at":"2026-10-23T04:48:46.627Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.configd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:46.633Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:46.642Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/config.toml","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:46.776Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:46.777Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:46.778Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.079Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/openai-templates/.tmpWYw6Zm","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.080Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/github/.tmpSWqpYP","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.081Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/work-pets/.tmpXQi4LB","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.111Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/plugin-management/.tmpVZMpHu","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.112Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/created-by-me-remote/dev-6ad7066dd0b8819193d4712f2fe07893/.tmpvtDAiR","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:47.114Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/sites/.tmpiiYlZv","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:48.218Z","run":"171aeb8c","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.DNSConfiguration","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:49.523Z","run":"171aeb8c","action":"sysctl-read","kind":"system","target":"kern.grade_cputype","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:48:59.429Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T04_48_59_327Z-debug-0.log","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T04:49:14.918Z","run":"171aeb8c","action":"write","kind":"file","target":"~/.npm/_logs/2026-10-23T04_49_14_850Z-debug-0.log","verdict":"denied","source":"kernel"}

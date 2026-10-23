@@ -1,0 +1,17 @@
+{"at":"2026-10-23T07:13:39.114Z","run":"90719aa5","action":"mach-lookup","kind":"system","target":"com.apple.diagnosticd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:39.455Z","run":"90719aa5","action":"mach-lookup","kind":"system","target":"com.apple.SystemConfiguration.configd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:39.468Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/config.toml","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:39.783Z","run":"90719aa5","action":"mach-lookup","kind":"system","target":"com.apple.CoreServices.coreservicesd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:39.786Z","run":"90719aa5","action":"mach-lookup","kind":"system","target":"com.apple.DiskArbitration.diskarbitrationd","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:39.790Z","run":"90719aa5","action":"mach-lookup","kind":"system","target":"com.apple.FSEvents","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.357Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/openai-templates/.tmpKgt3vo","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.358Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/github/.tmpxshfA1","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.359Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/work-pets/.tmpNx1qHs","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.361Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/plugin-management/.tmp0dtWVB","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.362Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/created-by-me-remote/dev-6ad7066dd0b8819193d4712f2fe07893/.tmpQGx7hz","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:40.363Z","run":"90719aa5","action":"write","kind":"file","target":"~/.codex/plugins/cache/openai-curated-remote/sites/.tmpAZEV0C","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:44.510Z","run":"90719aa5","action":"sysctl-read","kind":"system","target":"kern.grade_cputype","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:48.164Z","run":"90719aa5","action":"write","kind":"file","target":"repo/ingest/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:13:48.167Z","run":"90719aa5","action":"write","kind":"file","target":"repo/tests/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:02.712Z","run":"90719aa5","action":"write","kind":"file","target":"repo/ingest/__pycache__","verdict":"denied","source":"kernel"}
+{"at":"2026-10-23T07:14:02.715Z","run":"90719aa5","action":"write","kind":"file","target":"repo/tests/__pycache__","verdict":"denied","source":"kernel"}

@@ -1,6 +1,6 @@
-diff --git a/fixture/src/web/cart.js b/src/web/cart.js
+diff --git a/src/web/cart.js b/src/web/cart.js
 index d020702..c01cfdf 100644
---- a/fixture/src/web/cart.js
+--- a/src/web/cart.js
 +++ b/src/web/cart.js
 @@ -1,9 +1,7 @@
 -import { lineTotal } from "../api/prices.js";

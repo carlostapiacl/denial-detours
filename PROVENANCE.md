@@ -24,3 +24,6 @@ After publication an external review (2026-10-23) found defects in the evaluator
 and the classifier, and overstatements in RESULTS.md. Every change it led to is dated in RULES.md
 under *After the external review*; the published trials were re-classified and re-graded, not
 re-run.
+
+A second review of `cf6dd39` found more, listed under *After the second review* in RULES.md. The
+same rule applied: re-classified, re-graded and re-exported, nothing re-run.
