@@ -27,3 +27,8 @@ re-run.
 
 A second review of `cf6dd39` found more, listed under *After the second review* in RULES.md. The
 same rule applied: re-classified, re-graded and re-exported, nothing re-run.
+
+A third review of `4b83847`, under *After the third review*: one runner defect that no published
+trial reached, a replay of every graded trial from public files, and a classifier change that
+moved seven `kernelOwnerDenials` counts and no outcome. Re-classified and re-exported; nothing re-run.
+

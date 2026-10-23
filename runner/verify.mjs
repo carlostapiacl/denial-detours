@@ -5,7 +5,7 @@
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { spawnSync } from "node:child_process";
+import { runScript, jsonLines } from "./sub.mjs";
 
 const round = process.argv[2];
 const LAB = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -14,8 +14,7 @@ const key = (r) => `${r.task}/${r.agent}/${r.condition}/${r.id}`;
 const strip = ({ dir, ...r }) => JSON.stringify(r);
 const pub = new Map(readFileSync(join(OUT, "classification.jsonl"), "utf8").split("\n").filter(Boolean)
   .map((l) => JSON.parse(l)).map((r) => [key(r), strip(r)]));
-const again = spawnSync("node", [join(LAB, "runner/classify.mjs")], { encoding: "utf8",
-  env: { ...process.env, DD_RUNS: join(OUT, "trials") } }).stdout.split("\n").filter(Boolean).map((l) => JSON.parse(l));
+const again = jsonLines(runScript("classify.mjs", [], { ...process.env, DD_RUNS: join(OUT, "trials") }));
 const differ = again.filter((r) => pub.get(key(r)) !== strip(r)).map(key);
 console.log(`${again.length - differ.length} of ${pub.size} rows reproduce from the published trials`);
 for (const k of differ) console.log(`  differs: ${k}`);

@@ -5,9 +5,9 @@
 // like an email address, a token or a key is left in it.
 //
 //   node runner/export.mjs <round>
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, statSync, mkdtempSync, renameSync, cpSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, statSync, mkdtempSync, renameSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { homedir, tmpdir } from "node:os";
+import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
@@ -15,11 +15,14 @@ const round = process.argv[2];
 if (!round) { console.error("usage: export.mjs <round>"); process.exit(2); }
 const LAB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const RUNS = process.env.DD_RUNS ?? join(homedir(), "Library/Caches/denial-detours/runs");
-// Built in a private staging directory, checked whole, and only then moved
-// into results/: a refused export leaves nothing in the repository. A previous
-// export of the same round is moved aside, not deleted.
+// Built in a staging directory next to results/<round> (same file system, so
+// the final step is a rename), checked whole, and only then promoted: a refused
+// or failed export leaves results/ as it was. The staging directory is
+// private (mkdtemp, 0700) and ignored by git. A previous export of the same
+// round is moved aside, not deleted.
 const FINAL = join(LAB, "results", round);
-const OUT = mkdtempSync(join(tmpdir(), `dd-export-${round}-`));
+mkdirSync(dirname(FINAL), { recursive: true });
+const OUT = mkdtempSync(join(LAB, "results", `.staging-${round}-`));
 const FILES = ["transcript.jsonl", "diff.patch", "test.txt", "stderr.txt", "meta.json"];
 const LEAK = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}|sk-[A-Za-z0-9_-]{16,}|ghp_[A-Za-z0-9]{20,}|xox[bap]-[A-Za-z0-9-]{10,}|eyJ[A-Za-z0-9_-]{30,}\.|-----BEGIN [A-Z ]*PRIVATE KEY/;
 // Addresses that are part of the work, not of anyone: git's fixture identity and the
@@ -91,8 +94,16 @@ function refuseIfProblems() {
   process.exit(1);
 }
 refuseIfProblems();
-const node = (script, ...args) => spawnSync("node", [join(LAB, "runner", script), ...args],
-  { encoding: "utf8", env: process.env, maxBuffer: 1 << 28 }).stdout;
+// A helper that fails stops the export: its partial output is never published.
+function node(script, ...args) {
+  const r = spawnSync("node", [join(LAB, "runner", script), ...args], { encoding: "utf8", env: process.env, maxBuffer: 1 << 28 });
+  if (r.status !== 0 || r.error) {
+    console.error(`refused: ${script} failed (${r.error?.message ?? `exit ${r.status}`}); nothing was written to results/. Staging left in ${OUT}`);
+    if (r.stderr) console.error(r.stderr.trim().split("\n").slice(-5).join("\n"));
+    process.exit(1);
+  }
+  return r.stdout;
+}
 const [rows, summary] = node("classify.mjs", "--summary").split("\n\n");
 // The trial directory is the machine's; the published path stands in for it.
 const published = rows.split("\n").filter(Boolean).map((l) => {
@@ -103,10 +114,34 @@ writeFileSync(join(OUT, "summary.tsv"), summary);
 writeFileSync(join(OUT, "counterfactual.jsonl"), scrub(node("counterfactual.mjs")));
 writeFileSync(join(OUT, "annotations.jsonl"), scrub(node("annotate.mjs")));
 writeFileSync(join(OUT, "stats.md"), node("stats.mjs", join(OUT, "classification.jsonl")));
+// The files must agree with each other and with the trials: one row per trial,
+// no key twice, and one annotation and one counterfactual per compensation.
+const jsonl = (f) => readFileSync(join(OUT, f), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+const key = (r) => `${r.task}/${r.agent}/${r.condition}/${r.id}`;
+const cls = jsonl("classification.jsonl");
+const comp = new Set(cls.filter((r) => r.outcome === "compensated").map(key));
+if (cls.length !== n) problems.push(`classification.jsonl: ${cls.length} rows for ${n} trials`);
+if (new Set(cls.map(key)).size !== cls.length) problems.push("classification.jsonl: a key appears twice");
+for (const f of ["annotations.jsonl", "counterfactual.jsonl"]) {
+  const keys = jsonl(f).map(key);
+  if (keys.length !== comp.size || new Set(keys).size !== keys.length || keys.some((k) => !comp.has(k)))
+    problems.push(`${f}: ${keys.length} rows do not match the ${comp.size} compensated trials`);
+}
+if (!/\|/.test(readFileSync(join(OUT, "stats.md"), "utf8"))) problems.push("stats.md: no table");
 checkTree(OUT);
 refuseIfProblems();
-mkdirSync(dirname(FINAL), { recursive: true });
-if (existsSync(FINAL)) renameSync(FINAL, mkdtempSync(join(tmpdir(), `dd-previous-${round}-`)) + "/" + round);
-cpSync(OUT, FINAL, { recursive: true });
-rmSync(OUT, { recursive: true, force: true }); // the staging copy, made above
-console.log(`${n} trials → ${FINAL}`);
+// Promotion: two renames on one file system. If the second fails, the first
+// is undone, so results/<round> is either the old export or the new one.
+let previous = null;
+if (existsSync(FINAL)) {
+  previous = join(LAB, "results", `.previous-${round}-${new Date().toISOString().replace(/[:.]/g, "-")}`);
+  renameSync(FINAL, previous);
+}
+try {
+  renameSync(OUT, FINAL);
+} catch (e) {
+  if (previous) renameSync(previous, FINAL);
+  console.error(`refused: could not promote ${OUT} (${e.message}); results/${round} left as it was`);
+  process.exit(1);
+}
+console.log(`${n} trials → ${FINAL}${previous ? ` (previous export in ${previous})` : ""}`);

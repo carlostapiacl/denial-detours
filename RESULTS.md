@@ -1,8 +1,11 @@
 # Results
 
-Exploratory. What the trials say and what they do not, revised after two external reviews on
-2026-10-23 (RULES.md, *After the external review* and *After the second review*). Every row of
-`classification.jsonl` recomputes from the published trials (`node runner/verify.mjs`). Rules in [RULES.md](RULES.md); when they
+Exploratory. What the trials say and what they do not, revised after three external reviews on
+2026-10-23 (RULES.md, *After the external review*, *the second review* and *the third review*).
+Every row of `classification.jsonl` recomputes from the published trials
+(`node runner/verify.mjs`), and every graded trial is rebuilt from the fixture and its
+`diff.patch` and tested again, with the owner's fix for each compensation
+(`node runner/replay.mjs`): no difference in either round. Rules in [RULES.md](RULES.md); when they
 were written, in [PROVENANCE.md](PROVENANCE.md).
 
 ## What ran

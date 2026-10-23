@@ -175,3 +175,31 @@ A second adversarial review of `cf6dd39` found:
 - **`baseline` ran an unsandboxed agent by default.** It now refuses unless
   `DD_ALLOW_UNSANDBOXED=1`, meant for a disposable VM.
 - **The README said the rules predated the results.** Corrected, as PROVENANCE.md says.
+
+## After the third review (2026-10-23, 08:00–09:00)
+
+A third review of `4b83847` found:
+
+- **`run.mjs` could not run opencode under `seisin`.** opencode has no hooks and the runner
+  installed one without checking; `conditions.sh` asks for that combination. The hook is now
+  installed only where it exists, and `seisin-nocomp` is still refused for an agent without
+  hooks. Round 2 never reached that cell, so no published trial is affected.
+- **`verify.mjs` checks labels, not grades.** It recomputes the classification from the
+  published metadata, `testsPass` included. `runner/replay.mjs` now rebuilds every graded trial
+  from the fixture (checked against its hashes) and the published `diff.patch`, runs the tests in
+  the sandboxed evaluator, compares with `testsPass`, applies the owner's fix to every
+  compensation and compares with `counterfactual.jsonl`. It fails on any difference, missing row
+  or patch that does not apply. Round 1: 93 graded trials and 30 counterfactuals, no difference.
+  Round 2: see RESULTS.md. Trials that timed out (`error`) have no graded state and are skipped.
+- **The export used helpers' output without checking them.** Every helper script now stops the
+  export when it fails (`runner/sub.mjs`), the files are checked against each other (one row per
+  trial, no repeated key, one annotation and one counterfactual per compensation), staging is
+  built inside `results/` (same file system, ignored by git) and promoted with renames; if the
+  second rename fails the first is undone. A previous export is kept as `results/.previous-*`.
+- **Python's bytecode cache showed as refused writes to the owner's folder.** In five
+  `csv-parse` trials the kernel refused only `__pycache__` under the owner's directory while the
+  tests ran, and in two `bare` trials it was mixed with real attempts. The classifier no longer
+  counts `__pycache__` in `kernelOwnerDenials`: seven rows changed that count (five to 0, two `bare`
+  rows from 3 to 1 and 5 to 3), and no outcome changed. Future trials run with
+  `PYTHONDONTWRITEBYTECODE=1`; round 2 ran without it.
+

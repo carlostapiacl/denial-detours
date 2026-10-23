@@ -73,6 +73,7 @@ node runner/classify.mjs --summary        # the table
 node runner/narrate.mjs <trial dir>       # one trial as text
 node runner/review.mjs                    # a reading sheet: compensations and a 10 % sample
 node runner/verify.mjs round-1            # recompute a round's classification from results/
+node runner/replay.mjs round-1            # rebuild each trial from fixture + diff, run its tests and the owner's fix again
 node --test runner/rules.test.mjs runner/evaluate.test.mjs   # the rules, and the evaluator's isolation
 ```
 

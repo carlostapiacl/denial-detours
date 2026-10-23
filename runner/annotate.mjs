@@ -14,13 +14,12 @@
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { spawnSync } from "node:child_process";
+import { runScript, jsonLines } from "./sub.mjs";
 import { homedir } from "node:os";
 import { eventsOf } from "./events.mjs";
 
 const LAB = join(dirname(fileURLToPath(import.meta.url)), "..");
-const run = (s) => spawnSync("node", [join(LAB, "runner", s)], { encoding: "utf8", env: process.env, maxBuffer: 1 << 26 })
-  .stdout.split("\n").filter(Boolean).filter((l) => l.startsWith("{")).map((l) => JSON.parse(l));
+const run = (s) => jsonLines(runScript(s));
 const key = (r) => `${r.task}/${r.agent}/${r.condition}/${r.id}`;
 const cf = new Map();
 for (const r of run("counterfactual.mjs")) {

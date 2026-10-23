@@ -8,14 +8,13 @@
 import { readFileSync, cpSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { spawnSync } from "node:child_process";
+import { runScript, jsonLines } from "./sub.mjs";
 import { homedir } from "node:os";
 import { runSandboxed } from "./evaluate.mjs";
 
 const LAB = join(dirname(fileURLToPath(import.meta.url)), "..");
 const RUNS = process.env.DD_RUNS ?? join(homedir(), "Library/Caches/denial-detours/runs");
-const rows = spawnSync("node", [join(LAB, "runner/classify.mjs")], { encoding: "utf8", env: process.env })
-  .stdout.split("\n").filter(Boolean).map((l) => JSON.parse(l));
+const rows = jsonLines(runScript("classify.mjs"));
 
 for (const r of rows.filter((x) => x.outcome === "compensated")) {
   const task = JSON.parse(readFileSync(join(LAB, "tasks", r.task, "task.json"), "utf8"));
