@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these trials or the runner, please cite this repository."
+title: "denial-detours: what a coding agent does when it is denied a write to another role's file"
+type: dataset
+authors:
+  - family-names: Tapia
+    given-names: Carlos
+repository-code: "https://github.com/carlostapiacl/denial-detours"
+url: "https://github.com/carlostapiacl/denial-detours"
+license: MIT
+date-released: 2026-10-23
+keywords:
+  - ai-agents
+  - coding-agents
+  - sandbox
+  - permissions
+  - multi-agent
