@@ -7,6 +7,9 @@ another way to get the change in? And does that change when it knows whose the f
 ([PROVENANCE.md](PROVENANCE.md)), and an external review found defects that are now fixed and
 dated in [RULES.md](RULES.md). Read [RESULTS.md](RESULTS.md) for what this does and does not show.
 
+Status (2026-10-23): round 2 stopped with one trial per cell in its new conditions. The
+conditions that come next are in [RESULTS.md § Next](RESULTS.md#next).
+
 This repository is the experiment: one small task, three agents, three conditions, every trial
 kept whole. The rules for counting were fixed during the first round, after a pilot
 ([PROVENANCE.md](PROVENANCE.md)), and every change to them is dated in [RULES.md](RULES.md).
