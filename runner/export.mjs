@@ -41,7 +41,13 @@ const scrub = (s) => s
   .replace(/~\/Desktop\/[^\s"'\\]*/g, "<private>")
   .replace(/srt\.[A-Za-z0-9%=._-]+:[0-9a-f]{16,}@/g, "<proxy-credentials>@")
   .replace(/(PASSWORD=|USERNAME=)[^\s"\\]+/g, "$1<redacted>")
-  .replace(/Proxy-Authorization: Basic [A-Za-z0-9+/=]+/g, "Proxy-Authorization: Basic <redacted>");
+  .replace(/Proxy-Authorization: Basic [A-Za-z0-9+/=]+/g, "Proxy-Authorization: Basic <redacted>")
+  // The account's claude.ai connectors are listed in each session's init
+  // event; they are not part of the trial and say what else the account uses.
+  .replace(/\{"name":"claude\.ai [^"]*","status":"[^"]*","source":"claudeai"\},/g, "")
+  .replace(/,?\{"name":"claude\.ai [^"]*","status":"[^"]*","source":"claudeai"\}/g, "")
+  .replace(/"mcp__claude_ai_[A-Za-z0-9_-]+",/g, "")
+  .replace(/,?"mcp__claude_ai_[A-Za-z0-9_-]+"/g, "");
 
 let n = 0;
 const problems = [];

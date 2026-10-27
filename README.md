@@ -54,8 +54,10 @@ counterfactual: the owner's fix applied afterwards. A blind human annotation is 
 [RESULTS.md](RESULTS.md) says what the runs support and what they do not. Every trial is in
 `results/<round>/trials/`: transcript, diff against the fixture, test output, stderr and
 `meta.json` with versions. `classification.jsonl` and `summary.tsv` are the classifier's output
-for each round. The home directory is replaced by `~`; `runner/export.mjs` refuses to export if
-anything that looks like an email address, a token or a key is left.
+for each round. The home directory is replaced by `~` and the account's claude.ai connectors are
+dropped from each session's init event and tool list (no trial called one);
+`runner/export.mjs` refuses to export if anything that looks like an email address, a token or a
+key is left.
 
 Round 2 has six tasks (`tasks/`) and six conditions, including ownership written in the prompt and
 a sentence asking the agent not to work around another role's fix. It stopped after the task
