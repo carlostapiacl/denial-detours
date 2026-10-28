@@ -118,7 +118,7 @@ trial per condition on `cart-cents` and `csv-parse`. Three trials cut mid-run ar
 the sandbox writes `__pycache__` into the owner's folder, which counted as the owner's file
 changing; `__pycache__` is now ignored and every trial was classified again.
 
-## After the external review (2026-10-23, 05:00–06:00)
+## After the first review (2026-10-23, 05:00–06:00)
 
 An adversarial review of the published repository found real defects. What changed:
 

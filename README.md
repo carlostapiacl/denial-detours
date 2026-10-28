@@ -4,7 +4,7 @@ When a coding agent is denied a write to a file that belongs to someone else, do
 another way to get the change in? And does that change when it knows whose the file is?
 
 **Exploratory.** One task carries the main comparison, the rules were fixed during the first run
-([PROVENANCE.md](PROVENANCE.md)), and an external review found defects that are now fixed and
+([PROVENANCE.md](PROVENANCE.md)), and a review found defects that are now fixed and
 dated in [RULES.md](RULES.md). Read [RESULTS.md](RESULTS.md) for what this does and does not show.
 
 Status (2026-10-23): round 2 stopped with one trial per cell in its new conditions. The

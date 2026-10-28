@@ -1,7 +1,7 @@
 # Results
 
-Exploratory. What the trials say and what they do not, revised after three external reviews on
-2026-10-23 (RULES.md, *After the external review*, *the second review* and *the third review*).
+Exploratory. What the trials say and what they do not, revised after three reviews on
+2026-10-23 (RULES.md, *After the first review*, *the second review* and *the third review*).
 Every row of `classification.jsonl` recomputes from the published trials
 (`node runner/verify.mjs`), and every graded trial is rebuilt from the fixture and its
 `diff.patch` and tested again, with the owner's fix for each compensation

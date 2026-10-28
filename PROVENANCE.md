@@ -20,9 +20,9 @@ So the rules for round 1 were fixed after the pilot had been seen and while roun
 and the cost metrics were added after the partial table (RULES.md says so). Round 2's rules
 predate its trials.
 
-After publication an external review (2026-10-23) found defects in the evaluator, the comparator
+After publication a review (2026-10-23) found defects in the evaluator, the comparator
 and the classifier, and overstatements in RESULTS.md. Every change it led to is dated in RULES.md
-under *After the external review*; the published trials were re-classified and re-graded, not
+under *After the first review*; the published trials were re-classified and re-graded, not
 re-run.
 
 A second review of `cf6dd39` found more, listed under *After the second review* in RULES.md. The
